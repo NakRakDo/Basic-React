@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- Pure React Js for interactive app -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <!-- Translation for interactive Dom -->
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js "></script>
+  <!-- bable for make browser understand the JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      /* JSX 전용 용어가 있따 ex) for -> htmlFor,  class -> className */
+
+      /* 초기에만 undefined  let 변수에 0 할당, 최초 상태값 let _value 값은 undefined 이므로 초기 amount 값은 undefiend */
+      const [amount, setAmount] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+
+      const onChange = (event) => {
+        /* amount 는 useState의 초기값 혹은 그 이후 setState에 의해 할당된 let _value 값을 가져와 상수로 할당함. */
+        console.log(amount);
+        /* setAmount는 _value에 입력 값을 할당하고 리렌더링 함. 값을 가져와 할당함.(amount 값은 안바뀜) */
+        setAmount(event.target.value);
+      };
+      const reset = () => {
+        console.log(amount);
+        setAmount(0);
+      };
+
+      const invert = () => {
+        console.log(amount);
+        reset();
+        setInverted((current) => !current);
+      };
+
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <div>
+            {amount}
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={inverted ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              disabled={inverted} //disabled={inverted === true}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={inverted ? amount : amount / 60}
+              id="hours"
+              placeholder="Hour"
+              type="number"
+              onChange={onChange}
+              disabled={!inverted} //disabled={inverted === false}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={invert}>{inverted ? "Turn Back" : "Invert"}</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</head>

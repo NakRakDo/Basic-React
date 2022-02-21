@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- Pure React Js for interactive app -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <!-- Translation for interactive Dom -->
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js "></script>
+  <!-- bable for make browser understand the JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    const Title = (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        I`m a Span
+      </h3>
+    );
+    const Button = (
+      <button
+        style={{
+          backgroundColor: "tomato",
+        }}
+        onClick={() => console.log("I`m clicked")}
+      >
+        Click me
+      </button>
+    );
+    const Container = React.createElement("div", null, [Title, Button]);
+    ReactDOM.render(container, root);
+  </script>
+</head>
